@@ -1,0 +1,219 @@
+/* ==========================================================================
+   1. CẤU HÌNH CHUNG & BỘ LỌC TOÀN TRANG (RESET & GLOBAL STYLES)
+   ========================================================================== */
+
+/* Thiết lập box-sizing giúp tính toán kích thước phần tử chính xác hơn */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Định dạng phông chữ, màu nền và màu chữ chủ đạo cho thương hiệu cà phê */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #fcf8f2; /* Màu kem nhẹ ấm cúng */
+  color: #3e2723;            /* Màu nâu cà phê đậm cho văn bản */
+  
+  /* [FLEXBOX] Cấu hình Flexbox dọc cho toàn bộ body để đẩy Footer xuống đáy trang khi nội dung ngắn */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+/* ==========================================================================
+   2. HEADER & THANH ĐIỀU HƯỚNG (FLEXBOX)
+   ========================================================================== */
+
+header {
+  background-color: #4a2c2a; /* Màu gỗ/cà phê trầm */
+  color: #ffffff;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* [FLEXBOX] Căn chỉnh Logo và Menu nằm trên cùng một hàng ngang */
+  display: flex;
+  justify-content: space-between; /* Đẩy Logo sang trái, Nav sang phải */
+  align-items: center;            /* Căn giữa theo chiều dọc */
+  flex-wrap: wrap;                /* Tự động xuống dòng trên màn hình nhỏ */
+  gap: 1rem;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* Menu điều hướng chính */
+header nav ul {
+  list-style: none;
+
+  /* [FLEXBOX] Sắp xếp các mục danh sách (li) nằm ngang */
+  display: flex;
+  gap: 1.5rem; /* Khoảng cách giữa các thẻ li */
+}
+
+header nav a {
+  color: #f4e8c1;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+/* Hiệu ứng rê chuột vào menu */
+header nav a:hover {
+  color: #e0a96d;
+}
+
+
+/* ==========================================================================
+   3. NỘI DUNG CHÍNH (MAIN LAYOUT - FLEXBOX & CSS GRID)
+   ========================================================================== */
+
+main {
+  width: 90%;
+  max-width: 1100px;
+  margin: 2rem auto;
+  flex: 1; /* [FLEXBOX] Chiếm toàn bộ khoảng trống còn lại để căn Footer xuống cuối */
+
+  /* [CSS GRID] Thiết lập khoảng cách giữa các Section theo chiều dọc */
+  display: grid;
+  grid-template-columns: 1fr; /* Mặc định các section xếp thành 1 cột */
+  gap: 2.5rem;
+}
+
+
+/* --- SECTION 1: HERO BANNER --- */
+main section:nth-child(1) {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding: 4rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+
+  /* [FLEXBOX] Căn giữa toàn bộ nội dung trong Hero Banner */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+main section:nth-child(1) h2 {
+  font-size: 2.2rem;
+}
+
+/* Nút kêu gọi hành động (Call to Action - CTA) */
+main section:nth-child(1) a {
+  display: inline-block;
+  background-color: #e0a96d;
+  color: #3e2723;
+  padding: 0.8rem 1.8rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+main section:nth-child(1) a:hover {
+  background-color: #d18f4e;
+  transform: translateY(-2px);
+}
+
+
+/* --- SECTION 2: CÂU CHUYỆN THƯƠNG HIỆU --- */
+main section:nth-child(2) {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+main section:nth-child(2) h2 {
+  color: #4a2c2a;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e0a96d;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+main section:nth-child(2) article h3 {
+  color: #8c533e;
+  margin-bottom: 0.5rem;
+}
+
+
+/* --- SECTION 3: ĐIỂM NỔI BẬT (CSS GRID) --- */
+main section:nth-child(3) {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+main section:nth-child(3) h2 {
+  color: #4a2c2a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* [CSS GRID] Biến danh sách `ul` thành bố cục mảng (Grid) 3 cột linh hoạt */
+main section:nth-child(3) ul {
+  list-style: none;
+
+  display: grid;
+  /* Chế độ đáp ứng linh hoạt (Responsive Grid): Tự động chia cột tùy kích thước màn hình */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Từng thẻ nội dung giá trị cốt lõi */
+main section:nth-child(3) li {
+  background-color: #fcf8f2;
+  border-left: 4px solid #e0a96d;
+  padding: 1.2rem;
+  border-radius: 0 8px 8px 0;
+}
+
+
+/* ==========================================================================
+   4. FOOTER (FLEXBOX)
+   ========================================================================== */
+
+footer {
+  background-color: #2b1a18;
+  color: #d7ccc8;
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+
+  /* [FLEXBOX] Căn chỉnh các đoạn văn bản trong Footer xếp dọc và căn giữa */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   5. RESPONSIVE DESIGN (TỐI ƯU CHO THIẾT BỊ DI ĐỘNG)
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  /* Chuyển Header sang dạng cột khi màn hình nhỏ */
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header nav ul {
+    flex-direction: column; /* Menu dọc cho điện thoại */
+    gap: 0.5rem;
+  }
+}
