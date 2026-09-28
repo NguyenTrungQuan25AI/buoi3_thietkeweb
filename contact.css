@@ -1,8 +1,37 @@
 /* ==========================================================================
-   1. CHUẨN HÓA BOX MODEL (BOX MODEL & RESET)
+   0. CSS VARIABLES (:ROOT) - GLOBAL THEME CONFIGURATION
    ========================================================================== */
 
-/* Áp dụng border-box giúp tính toán kích thước tổng (Content + Padding + Border) chính xác */
+:root {
+  /* --- Brand Colors (Primary / Secondary) --- */
+  --color-primary: #3e2723;       /* Deep coffee brown */
+  --color-primary-dark: #261c14;  /* Darker coffee tone for footer/hover */
+  --color-secondary: #6d4c41;     /* Medium warm brown */
+  --color-accent: #8d6e63;        /* Muted accent brown */
+
+  /* --- Text Colors (3 Shades of Gray / Neutral) --- */
+  --text-dark: #333333;           /* Dark gray - primary body text */
+  --text-medium: #4e342e;         /* Medium warm gray/brown - headings & labels */
+  --text-muted: #a1887f;          /* Light muted gray/brown - footer & subtle text */
+  --text-light: #ffffff;          /* Pure white text for dark backgrounds */
+  --text-nav: #e0e0e0;            /* Soft off-white for navigation links */
+
+  /* --- Background Colors --- */
+  --bg-main: #fcf9f2;             /* Soft light cream main background */
+  --bg-card: #ffffff;             /* Pure white for sections/cards */
+  --bg-input: #fafafa;            /* Off-white for form inputs */
+
+  /* --- Border & Shadow Colors --- */
+  --border-light: #efebe9;        /* Light subtle border */
+  --border-medium: #d7ccc8;       /* Medium border for inputs/headers */
+  --shadow-color: rgba(0, 0, 0, 0.04);
+  --focus-ring-color: rgba(109, 76, 65, 0.3);
+}
+
+/* ==========================================================================
+   1. CHUẨN HÓA BOX MODEL & RESET CSS
+   ========================================================================== */
+
 *,
 *::before,
 *::after {
@@ -11,145 +40,146 @@
   padding: 0;
 }
 
+/* ==========================================================================
+   2. GIAO DIỆN MẶC ĐỊNH DÀNH CHO MOBILE (MOBILE-FIRST BASE STYLES)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   2.1. CẤU TRÚC LƯỚI TỔNG THỂ TRÊN MOBILE (1 CỘT DUY NHẤT)
+   -------------------------------------------------------------------------- */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333333;
-  background-color: #fcf9f2; /* Màu nền kem nhẹ */
-}
+  color: var(--text-dark);
+  background-color: var(--bg-main);
 
-/* ==========================================================================
-   2. CẤU TRÚC LƯỚI TỔNG THỂ (CSS GRID LAYOUT)
-   ========================================================================== */
-
-/* Thiết lập CSS Grid tổng thể bao gồm cả Header, Main, Sidebar và Footer */
-body {
+  /* Bật CSS Grid 1 cột duy nhất cho Mobile */
   display: grid;
   min-height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
   
-  /* Grid Rows: Header (tự động), Main/Sidebar (giãn hết phần còn lại), Footer (tự động) */
-  grid-template-rows: auto 1fr auto;
-  
-  /* Grid Columns: Cột Sidebar cố định 280px, Cột Main tự động chiếm phần còn lại */
-  grid-template-columns: 1fr 280px;
-
-  /* Định nghĩa vùng lưới */
+  /* Sắp xếp thứ tự các vùng theo chiều dọc trên điện thoại */
   grid-template-areas:
-    "header  header"
-    "main    sidebar"
-    "footer  footer";
-
-  /* Khoảng cách giữa các ô lưới */
-  gap: 20px;
+    "header"
+    "sidebar"   /* Đưa Sidebar lên đầu (sau Header) */
+    "main"
+    "footer";
+    
+  gap: 15px; /* Khoảng cách gọn gàng giữa các khối trên mobile */
 }
 
-/* Gán các phần tử HTML vào từng vùng Grid tương ứng */
+/* Gán các phần tử HTML vào vùng Grid tương ứng */
 header  { grid-area: header; }
-main    { grid-area: main; }
 aside   { grid-area: sidebar; }
+main    { grid-area: main; }
 footer  { grid-area: footer; }
 
 
-/* ==========================================================================
-   3. CĂN CHỈNH THÀNH PHẦN BÊN TRONG (FLEXBOX & BOX MODEL)
-   ========================================================================== */
-
-/* --- 3.1. HEADER & NAVIGATION BAR (FLEXBOX) --- */
+/* --------------------------------------------------------------------------
+   2.2. HEADER & NAVIGATION BAR TRÊN MOBILE
+   -------------------------------------------------------------------------- */
 header {
-  background-color: #3e2723; /* Màu nâu cà phê đậm */
-  color: #ffffff;
-  
-  /* Box Model: Padding đệm bên trong, Border viền dưới */
-  padding: 20px 40px;
-  border-bottom: 4px solid #d7ccc8;
+  background-color: var(--color-primary);
+  color: var(--text-light);
+  padding: 20px;
+  border-bottom: 4px solid var(--border-medium);
+  text-align: center;
 
-  /* Flexbox: Căn ngang Tiêu đề H1 và Thanh điều hướng sang 2 bên */
+  /* Flexbox hàng dọc trên mobile */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 15px;
 }
 
 header h1 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   letter-spacing: 1px;
 }
 
-/* Navigation Bar dùng Flexbox để xếp các thẻ <li> theo hàng ngang */
 nav ul {
   display: flex;
+  flex-direction: column; /* Xếp menu theo chiều dọc */
   list-style: none;
-  gap: 15px; /* Khoảng cách linh hoạt giữa các mục liên kết */
+  width: 100%;
+  gap: 8px;
 }
 
 nav a {
-  color: #e0e0e0;
+  display: block; /* Biến thẻ a thành khối hình chữ nhật rộng full màn hình */
+  width: 100%;
+  text-align: center;
+  color: var(--text-nav);
   text-decoration: none;
-  
-  /* Box Model: Padding tạo vùng nhấn thoải mái cho người dùng */
-  padding: 8px 16px;
+  padding: 10px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
 nav a:hover,
 nav a strong {
-  background-color: #6d4c41;
-  color: #ffffff;
+  background-color: var(--color-secondary);
+  color: var(--text-light);
 }
 
 
-/* --- 3.2. KHU VỰC MAIN & CARD CONTENT (FLEXBOX & BOX MODEL) --- */
-main {
-  /* Box Model: Margin và Padding kiểm soát khoảng cách nội dung chính */
-  padding: 10px 0 10px 40px;
+/* --------------------------------------------------------------------------
+   2.3. KHU VỰC SIDEBAR & MAIN TRÊN MOBILE
+   -------------------------------------------------------------------------- */
+aside {
+  padding: 10px 20px 0 20px;
 }
 
-/* Các section được dựng theo dạng Card Content */
-section {
-  background-color: #ffffff;
-  
-  /* Box Model: Margin đáy tách các section, Padding tạo độ thoáng bên trong */
-  margin-bottom: 25px;
-  padding: 25px;
-  border: 1px solid #efebe9;
-  border-left: 5px solid #6d4c41; /* Điểm nhấn viền trái cho Card */
+.sidebar-card {
+  background-color: var(--bg-card);
+  padding: 15px;
+  border: 1px solid var(--border-light);
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+main {
+  padding: 10px 20px;
+}
+
+section {
+  background-color: var(--bg-card);
+  margin-bottom: 15px;
+  padding: 18px;
+  border: 1px solid var(--border-light);
+  border-left: 5px solid var(--color-secondary);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px var(--shadow-color);
 }
 
 section h2 {
-  color: #4e342e;
-  font-size: 1.4rem;
-  
-  /* Box Model: Margin bottom tách tiêu đề khỏi nội dung */
-  margin-bottom: 15px;
+  color: var(--text-medium);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 2px solid #efebe9;
+  border-bottom: 2px solid var(--border-light);
 }
 
-/* Định dạng địa chỉ liên hệ */
 address {
   font-style: normal;
-  line-height: 2;
+  line-height: 1.8;
   margin-bottom: 10px;
 }
 
 
-/* --- 3.3. QUẢN LÝ FORM LIÊN HỆ BẰNG FLEXBOX & BOX MODEL --- */
+/* --------------------------------------------------------------------------
+   2.4. FORM CẢM ỨNG NÚT TRÀN MÀN HÌNH (TOUCH-FRIENDLY)
+   -------------------------------------------------------------------------- */
 form {
-  /* Flexbox chiều dọc: Sắp xếp các dòng trong Form nối tiếp nhau */
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Khoảng cách giữa các nhóm input */
+  gap: 15px;
 }
 
-/* Xóa các thẻ <br> thừa trong HTML khi đã dùng Flexbox gap */
 form br {
   display: none;
 }
 
 form div {
-  /* Flexbox chiều dọc cho từng nhóm Label + Input */
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -157,120 +187,305 @@ form div {
 
 label {
   font-weight: 600;
-  color: #4e342e;
+  color: var(--text-medium);
 }
 
-/* Box Model cho các ô nhập liệu Input, Select, Textarea */
 input[type="text"],
 input[type="email"],
 select,
 textarea {
   width: 100%;
-  
-  /* Box Model: Padding bên trong ô nhập, Border viền ngoài */
   padding: 10px 14px;
-  border: 1px solid #d7ccc8;
+  border: 1px solid var(--border-medium);
   border-radius: 6px;
   font-family: inherit;
   font-size: 0.95rem;
-  background-color: #fafafa;
+  background-color: var(--bg-input);
+  color: var(--text-dark);
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #6d4c41;
-  background-color: #ffffff;
-  box-shadow: 0 0 4px rgba(109, 76, 65, 0.3);
+  border-color: var(--color-secondary);
+  background-color: var(--bg-card);
+  box-shadow: 0 0 4px var(--focus-ring-color);
 }
 
-/* Nút bấm Submit */
+/* Nút Submit tràn full độ rộng màn hình mobile */
 button[type="submit"] {
-  /* Flexbox self: Đẩy nút bấm sang bên trái với độ rộng tự điều chỉnh */
-  align-self: flex-start;
-
-  /* Box Model: Padding đệm nút, Border viền */
-  padding: 12px 28px;
-  background-color: #4e342e;
-  color: #ffffff;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--text-medium);
+  color: var(--text-light);
   border: none;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #3e2723;
+  background-color: var(--color-primary);
 }
 
 
-/* --- 3.4. SIDEBAR (KHU VỰC BỔ SUNG) --- */
-aside {
-  /* Box Model: Margin phải và Padding đệm */
-  padding: 10px 40px 10px 0;
-}
-
-.sidebar-card {
-  background-color: #ffffff;
-  padding: 20px;
-  border: 1px solid #efebe9;
-  border-radius: 8px;
-}
-
-
-/* --- 3.5. FOOTER (FLEXBOX & BOX MODEL) --- */
+/* --------------------------------------------------------------------------
+   2.5. FOOTER TRÊN MOBILE
+   -------------------------------------------------------------------------- */
 footer {
-  background-color: #261c14;
-  color: #a1887f;
-  
-  /* Box Model: Padding đệm khoảng trống */
-  padding: 20px 40px;
+  background-color: var(--color-primary-dark);
+  color: var(--text-muted);
+  padding: 20px;
   font-size: 0.9rem;
-
-  /* Flexbox: Căn giữa nội dung footer theo chiều dọc và chiều ngang */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  text-align: center;
 }
 
 
 /* ==========================================================================
-   4. RESPONSIVE DESIGN (TỐI ƯU TRÊN ĐIỆN THOẠI & MÁY TÍNH BẢNG)
+   BỐ CỤC CSS GRID CHO .SERVICES-CONTAINER (QUY TẮC MOBILE-FIRST)
    ========================================================================== */
-@media (max-width: 768px) {
-  /* Chuyển CSS Grid tổng thể sang 1 cột duy nhất */
-  body {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "header"
-      "main"
-      "sidebar"
-      "footer";
-    gap: 10px;
-  }
 
+/* 1. MẶC ĐỊNH CHO MÀN HÌNH NHỎ (< 768PX): HIỂN THỊ 1 CỘT */
+.services-container {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 cột duy nhất */
+  gap: 20px;                 /* Khoảng cách giữa các ô dịch vụ */
+}
+
+/* 2. MÀN HÌNH MÁY TÍNH BẢNG / TABLET (768PX - 1024PX): HIỂN THỊ 2 CỘT */
+@media (min-width: 768px) {
+  .services-container {
+    grid-template-columns: repeat(2, 1fr); /* Chia thành 2 cột bằng nhau */
+  }
+}
+
+/* 3. MÀN HÌNH MÁY TÍNH / DESKTOP (> 1024PX): HIỂN THỊ 4 CỘT */
+@media (min-width: 1025px) {
+  .services-container {
+    grid-template-columns: repeat(4, 1fr); /* Chia thành 4 cột bằng nhau */
+  }
+}
+/* ==========================================================================
+   BỔ SUNG MEDIA QUERY CHO HEADER & NAV TRÊN DESKTOP (MÀN HÌNH LỚN)
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  /* 1. Chuyển Header thành hàng ngang, logo bên trái - menu bên phải */
   header {
-    flex-direction: column; /* Chuyển Nav sang dạng dọc */
-    gap: 15px;
-    padding: 20px;
-    text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 15px 40px;
   }
 
+  /* 2. Chuyển menu danh sách (ul) từ dọc thành ngang */
   nav ul {
+    flex-direction: row;
+    width: auto;
+    gap: 20px;
+  }
+
+  /* 3. Tối ưu thẻ a khi nằm ngang trên Desktop */
+  nav a {
+    width: auto;
+    padding: 8px 16px;
+  }
+}
+/* ==========================================================================
+   TỐI ƯU HÌNH ẢNH ĐÁP ỨNG (RESPONSIVE IMAGES & MEDIA STYLES)
+   ========================================================================== */
+
+/* 1. Quy tắc nền tảng cho tất cả hình ảnh trong website */
+img {
+  max-width: 100%;       /* Ngăn hình ảnh bị tràn ra ngoài khung chứa */
+  height: auto;          /* Giữ nguyên tỷ lệ khung hình tự nhiên */
+  display: block;        /* Loại bỏ khoảng trắng thừa dưới chân thẻ img */
+  object-fit: cover;     /* Cắt cúp ảnh thông minh khi cố định kích thước */
+}
+
+/* 2. Lớp tiện ích cho ảnh responsive chung */
+.responsive-img {
+  width: 100%;
+  height: auto;
+}
+
+.rounded-img {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* --------------------------------------------------------------------------
+   3. TỐI ƯU HERO BANNER (MOBILE-FIRST)
+   -------------------------------------------------------------------------- */
+.hero-contact {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.hero-img {
+  width: 100%;
+  /* Thiết lập tỷ lệ khung hình chuẩn trên Mobile (4:3) */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.65);
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-light, #ffffff);
+  text-align: center;
+  width: 90%;
+  padding: 10px;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. TỐI ƯU BỐ CỤC KHUNG CHỨA VÀ ẢNH CHO TABLET & DESKTOP
+   -------------------------------------------------------------------------- */
+
+/* Màn hình Tablet (≥ 768px) */
+@media (min-width: 768px) {
+  /* Thay đổi tỷ lệ Banner Hero sang dạng ngang rộng (16:7) */
+  .hero-img {
+    aspect-ratio: 16 / 7;
+    max-height: 320px;
+  }
+
+  /* Bố cục Grid 2 cột cho Phần Thông Tin Quán & Form Đặt Bàn */
+  .contact-info-section,
+  .form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  /* Định dạng chiều cao đồng bộ cho các ảnh phụ */
+  .info-image img,
+  .form-side-img img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Màn hình Desktop lớn (≥ 1024px) */
+@media (min-width: 1024px) {
+  .hero-img {
+    aspect-ratio: 21 / 9; /* Dạng Panorama siêu rộng cho máy tính */
+    max-height: 380px;
+  }
+
+  .info-image img,
+  .form-side-img img {
+    aspect-ratio: 1 / 1; /* Chuyển về ảnh vuông tỉ lệ 1:1 sang trọng trên Desktop */
+  }
+}
+/* --- RESET KHUNG TỔNG THỂ --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden; /* Ngăn xuất hiện thanh cuộn ngang khi tràn lề */
+}
+
+/* --- HEADER & NAV CONTAINER --- */
+header {
+  width: 100%;
+  background-color: #3e2723;
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  color: #ffffff;
+  font-size: 1.6rem;
+  white-space: nowrap;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+header nav a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+header nav a:hover,
+header nav a strong {
+  color: #ffffff;
+}
+
+/* --- MAIN CONTAINER (CĂN LỀ CHUẨN ĐỒNG BỘ) --- */
+main {
+  width: 90%;
+  max-width: 1100px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* --- HERO SECTION & IMAGES --- */
+section {
+  width: 100%;
+}
+
+.hero-contact img,
+main img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+  header {
     flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
     width: 100%;
   }
 
-  main, aside {
-    padding: 10px 20px;
-  }
-
-  button[type="submit"] {
-    width: 100%; /* Nút bấm giãn full chiều rộng trên mobile */
+  main {
+    width: 95%;
+    margin: 1rem auto;
   }
 }
