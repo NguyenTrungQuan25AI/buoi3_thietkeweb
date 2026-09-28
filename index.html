@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<link rel="stylesheet" href="styles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Trang giới thiệu tổng quan về quán cà phê không gian ấm cúng và hương vị nguyên bản.">
   <title>Aroma Coffee - Giới Thiệu Tổng Quan</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- ================= HEADER & THANH ĐIỀU HƯỚNG DÙNG CHUNG ================= -->
-  <!-- Thẻ header chứa logo và menu điều hướng chính của website -->
   <header>
     <h1>Aroma Coffee</h1>
     <nav>
       <ul>
-        <!-- Thẻ a tạo liên kết giữa các trang HTML -->
         <li><a href="index.html"><strong>Trang chủ & Giới thiệu</strong></a></li>
         <li><a href="products.html">Sản phẩm & Menu</a></li>
         <li><a href="contact.html">Liên hệ & Đặt bàn</a></li>
@@ -37,11 +35,13 @@
       <h2>Câu Chuyện Của Chúng Tôi</h2>
       <article>
         <h3>Hành trình từ nông trại đến tách cà phê</h3>
+        <!-- HÌNH ẢNH 1: Minh họa câu chuyện thương hiệu -->
+        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80" alt="Hạt cà phê rang thủ công chất lượng cao">
         <p>Chúng tôi tuyển chọn từng hạt cà phê Arabica và Robusta chất lượng cao từ vùng đất Tây Nguyên Việt Nam. Qua quy trình rang thủ công tỉ mỉ, Aroma Coffee cam kết giữ trọn hương vị đắng thanh, thơm nồng đặc trưng.</p>
       </article>
     </section>
 
-    <!-- Section 3: Điểm nổi bật / Giá trị cốt lõi -->
+    <!-- Section 3: Điểm nổi bật / Giá trị cốt lõi (Sidebar) -->
     <section>
       <h2>Tại Sao Chọn Aroma Coffee?</h2>
       <ul>
@@ -49,6 +49,33 @@
         <li><strong>Không Gian Thư Giãn:</strong> Thiết kế xanh, thích hợp để làm việc hoặc trò chuyện cùng bạn bè.</li>
         <li><strong>Phục Vụ Tận Tâm:</strong> Đội ngũ Barista am hiểu và chu đáo.</li>
       </ul>
+    </section>
+
+    <!-- Section 4: Dịch Vụ Của Chúng Tôi (Sử dụng Grid .services-container) -->
+    <section class="services-section">
+      <h2>Dịch Vụ Của Chúng Tôi</h2>
+      <div class="services-container">
+        <div class="service-card">
+          <!-- HÌNH ẢNH 2: Minh họa dịch vụ Rang Xay -->
+          <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=80" alt="Tách cà phê Espresso chất lượng">
+          <h3>Thủ Công Rang Xay</h3>
+          <p>Cà phê rang mới mỗi ngày giữ trọn hương vị tinh túy.</p>
+        </div>
+        <div class="service-card">
+          <h3>Giao Hàng Tận Nơi</h3>
+          <p>Ship nhanh trong 30 phút khu vực nội thành.</p>
+        </div>
+        <div class="service-card">
+          <!-- HÌNH ẢNH 3: Minh họa không gian quán -->
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=80" alt="Không gian quán cà phê ấm cúng">
+          <h3>Không Gian Làm Việc</h3>
+          <p>Wifi tốc độ cao, chỗ ngồi thoải mái & yên tĩnh.</p>
+        </div>
+        <div class="service-card">
+          <h3>Đặt Bàn Sự Kiện</h3>
+          <p>Không gian riêng cho tiệc nhỏ và hội thảo.</p>
+        </div>
+      </div>
     </section>
   </main>
 
