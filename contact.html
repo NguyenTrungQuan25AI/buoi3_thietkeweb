@@ -23,53 +23,85 @@
 
   <!-- ================= NỘI DUNG CHÍNH (MAIN) ================= -->
   <main>
-    <section>
-      <h2>Liên Hệ Với Chúng Tôi</h2>
-      <p>Bạn muốn đặt bàn trước hoặc gửi góp ý? Hãy điền vào form bên dưới hoặc liên hệ qua thông tin trực tiếp.</p>
+    <!-- Banner hình ảnh giới thiệu -->
+    <section class="hero-contact">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Không gian ấm cúng tại Aroma Coffee" class="responsive-img hero-img">
+      <div class="hero-text">
+        <h2>Liên Hệ Với Chúng Tôi</h2>
+        <p>Bạn muốn đặt bàn trước hoặc gửi góp ý? Hãy điền vào form bên dưới hoặc liên hệ qua thông tin trực tiếp.</p>
+      </div>
     </section>
 
-    <!-- Section 1: Thông tin trực tiếp & Giờ mở cửa -->
-    <section>
-      <h2>Thông Tin Quán</h2>
-      <address>
-        <p><strong>Địa chỉ:</strong> 123 Đường Cà Phê, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
-        <p><strong>Điện thoại:</strong> <a href="tel:0901234567">0901 234 567</a></p>
-        <p><strong>Email:</strong> <a href="mailto:contact@aromacoffee.com">contact@aromacoffee.com</a></p>
-      </address>
-      <p><strong>Giờ mở cửa:</strong> <time datetime="07:00">07:00</time> - <time datetime="22:30">22:30</time> (Hàng ngày)</p>
+    <!-- Section 1: Thông tin trực tiếp & Hình ảnh mặt tiền/bản đồ -->
+    <section class="contact-info-section">
+      <div class="info-details">
+        <h2>Thông Tin Quán</h2>
+        <address>
+          <p><strong>Địa chỉ:</strong> 123 Đường Cà Phê, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
+          <p><strong>Điện thoại:</strong> <a href="tel:0901234567">0901 234 567</a></p>
+          <p><strong>Email:</strong> <a href="mailto:contact@aromacoffee.com">contact@aromacoffee.com</a></p>
+        </address>
+        <p><strong>Giờ mở cửa:</strong> <time datetime="07:00">07:00</time> - <time datetime="22:30">22:30</time> (Hàng ngày)</p>
+      </div>
+      <div class="info-image">
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="Không gian pha chế Aroma Coffee" class="responsive-img rounded-img">
+      </div>
     </section>
 
-    <!-- Section 2: Form phản hồi / Đặt bàn -->
-    <section>
+    <!-- Section 2: Form phản hồi / Đặt bàn kèm hình ảnh không gian -->
+    <section class="contact-form-section">
       <h2>Gửi Tin Nhắn / Đặt Bàn</h2>
-      <form action="#" method="post">
-        <div>
-          <label for="fullname">Họ và tên:</label><br>
-          <input type="text" id="fullname" name="fullname" required placeholder="Nguyễn Văn A">
+      <div class="form-container">
+        <form action="#" method="post">
+          <div>
+            <label for="fullname">Họ và tên:</label>
+            <input type="text" id="fullname" name="fullname" required placeholder="Nguyễn Văn A">
+          </div>
+
+          <div>
+            <label for="email">Email liên hệ:</label>
+            <input type="email" id="email" name="email" required placeholder="example@gmail.com">
+          </div>
+
+          <div>
+            <label for="topic">Nhu cầu:</label>
+            <select id="topic" name="topic">
+              <option value="booking">Đặt bàn trước</option>
+              <option value="feedback">Góp ý dịch vụ</option>
+              <option value="other">Khác</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message">Lời nhắn:</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Nhập nội dung tin nhắn của bạn..."></textarea>
+          </div>
+
+          <button type="submit">Gửi Tin Nhắn</button>
+        </form>
+
+        <div class="form-side-img">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Bàn tiệc cà phê đặt trước" class="responsive-img rounded-img">
         </div>
-        <br>
-        <div>
-          <label for="email">Email liên hệ:</label><br>
-          <input type="email" id="email" name="email" required placeholder="example@gmail.com">
-        </div>
-        <br>
-        <div>
-          <label for="topic">Nhu cầu:</label><br>
-          <select id="topic" name="topic">
-            <option value="booking">Đặt bàn trước</option>
-            <option value="feedback">Góp ý dịch vụ</option>
-            <option value="other">Khác</option>
-          </select>
-        </div>
-        <br>
-        <div>
-          <label for="message">Lời nhắn:</label><br>
-          <textarea id="message" name="message" rows="5" required placeholder="Nhập nội dung tin nhắn của bạn..."></textarea>
-        </div>
-        <br>
-        <button type="submit">Gửi Tin Nhắn</button>
-      </form>
+      </div>
     </section>
+    <section class="hero-contact">
+  <picture>
+    <!-- Màn hình Desktop (≥ 1024px): Tải ảnh nét & tỉ lệ rộng -->
+    <source media="(min-width: 1024px)" srcset="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80">
+    
+    <!-- Màn hình Tablet (≥ 768px): Tải ảnh kích thước vừa -->
+    <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=80">
+    
+    <!-- Màn hình Mobile (< 768px): Tải ảnh nhẹ để tiết kiệm 4G/5G -->
+    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80" alt="Không gian ấm cúng tại Aroma Coffee" class="hero-img">
+  </picture>
+  
+  <div class="hero-text">
+    <h2>Liên Hệ Với Chúng Tôi</h2>
+    <p>Bạn muốn đặt bàn trước hoặc gửi góp ý? Hãy điền vào form bên dưới hoặc liên hệ qua thông tin trực tiếp.</p>
+  </div>
+</section>
   </main>
 
   <!-- ================= FOOTER DÙNG CHUNG ================= -->
