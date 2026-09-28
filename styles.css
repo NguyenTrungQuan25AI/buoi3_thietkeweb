@@ -8,9 +8,9 @@
     --color-secondary: #e0a96d;  /* Vàng đồng / Cam ấm */
   
     /* --- 3 Mức màu xám cho Text --- */
-    --text-dark: #2b1a18;        /* Mức 1: Tiêu đề chính, văn bản quan trọng */
-    --text-medium: #5a4038;      /* Mức 2: Nội dung mô tả, bài viết */
-    --text-light: #8d736a;       /* Mức 3: Chú thích, phụ đề, text chân trang */
+    --text-dark: #2b1a18;        /* Mức 1: Tiêu đề chính */
+    --text-medium: #5a4038;      /* Mức 2: Nội dung mô tả */
+    --text-light: #8d736a;       /* Mức 3: Phụ đề, text chân trang */
   
     /* --- 1 Màu nền trang --- */
     --bg-main: #fcf8f2;          /* Màu kem nhẹ ấm cúng */
@@ -22,7 +22,7 @@
   
   
   /* ==========================================================================
-     2. CẤU HÌNH CHUNG & RESET
+     2. CẤU HÌNH CHUNG & XỬ LÝ HÌNH ẢNH (RESET & RESPONSIVE IMAGES)
      ========================================================================== */
   
   * {
@@ -31,13 +31,23 @@
     box-sizing: border-box;
   }
   
+  /* [YÊU CẦU ĐẶC BIỆT] Tối ưu hóa toàn bộ hình ảnh trên website:
+     - max-width: 100%: Hình không bao giờ vượt quá chiều rộng khung chứa nó.
+     - height: auto: Tự động tính toán chiều cao theo đúng tỷ lệ gốc, tránh méo ảnh.
+  */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Loại bỏ khoảng trắng thừa dưới chân thẻ img mặc định */
+  }
+  
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     background-color: var(--bg-main);
     color: var(--text-medium);
     
-    /* [FLEXBOX] Giữ Footer luôn nằm ở đáy trang */
+    /* [FLEXBOX] Giữ Footer luôn ở đáy trang */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -94,13 +104,12 @@
     margin: 2rem auto;
     flex: 1;
   
-    /* [CSS GRID] Bố cục 2 cột mặc định cho màn hình lớn */
     display: grid;
     grid-template-columns: 300px 1fr;
     grid-template-areas: 
       "hero hero"
       "sidebar story"
-      "services services"; /* Section dịch vụ mới trải dài toàn bộ chiều rộng */
+      "services services";
     gap: 2rem;
   }
   
@@ -164,7 +173,14 @@
   
   main section:nth-child(2) article h3 {
     color: var(--text-dark);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Định dạng riêng cho ảnh trong phần Câu chuyện */
+  main section:nth-child(2) article img {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   }
   
   
@@ -204,10 +220,9 @@
   
   
   /* ==========================================================================
-     5. BỐ CỤC SERVICES CONTAINER (YÊU CẦU MỚI)
+     5. BỐ CỤC SERVICES CONTAINER (GRID 4 - 2 - 1 CỘT)
      ========================================================================== */
   
-  /* Định vị Section chứa Dịch vụ */
   main section.services-section {
     grid-area: services;
     background-color: var(--bg-card);
@@ -222,26 +237,40 @@
     text-align: center;
   }
   
-  /* [CSS GRID] Mặc định cho màn hình > 1024px: 4 CỘT & gap: 20px */
+  /* Mặc định cho màn hình > 1024px: 4 CỘT & gap: 20px */
   .services-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 cột bằng nhau */
-    gap: 20px;                             /* Khoảng cách 20px */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
   
-  /* Kiểu dáng cho từng ô Dịch vụ (Service Card) */
+  /* Kiểu dáng từng ô Dịch vụ */
   .service-card {
     background-color: var(--bg-main);
     border: 1px solid rgba(224, 169, 109, 0.3);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: 8px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Căn chỉnh nội dung bên trong card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .service-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Định dạng riêng cho ảnh trong Thẻ Dịch vụ */
+  .service-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover; /* Cắt vừa khung mà không làm biến dạng hình ảnh */
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
   }
   
   .service-card h3 {
@@ -281,15 +310,13 @@
   
   /* --- Màn hình từ 768px đến 1024px (Tablet) --- */
   @media (min-width: 768px) and (max-width: 1024px) {
-    /* [YÊU CẦU] .services-container hiển thị 2 CỘT */
     .services-container {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr); /* 2 Cột */
     }
   }
   
-  /* --- Màn hình dưới 768px (Mobile & Tablet nhỏ) --- */
+  /* --- Màn hình dưới 768px (Mobile) --- */
   @media (max-width: 767px) {
-    /* Dynamic layout cho main */
     main {
       grid-template-columns: 1fr;
       grid-template-areas: 
@@ -300,12 +327,10 @@
       gap: 1.5rem;
     }
   
-    /* [YÊU CẦU] .services-container hiển thị 1 CỘT duy nhất */
     .services-container {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr; /* 1 Cột duy nhất */
     }
   
-    /* Header trên màn hình nhỏ */
     header {
       flex-direction: column;
       text-align: center;
